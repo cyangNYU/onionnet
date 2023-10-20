@@ -264,11 +264,8 @@ if __name__ == "__main__":
     """
 
     parser = argparse.ArgumentParser(description=d, formatter_class=RawDescriptionHelpFormatter)
-    parser.add_argument("-inp", type=str, default="input.dat",
-                        help="Input. The input file containg the file path of each \n"
-                             "of the protein-ligand complexes files (in pdb format.)\n"
-                             "There should be only 1 column, each row or line containing\n"
-                             "the input file path, relative or absolute path.")
+    parser.add_argument("-inp", type=str, default="input.pdb",
+                        help="Input. The input file is protein-ligand complex pdb file.")
     parser.add_argument("-out", type=str, default="output.csv",
                         help="Output. Default is output.csv \n"
                              "The output file name containing the features, each sample\n"
@@ -288,9 +285,10 @@ if __name__ == "__main__":
 
     keys = ["_".join(x) for x in list(itertools.product(ALL_ELEMENTS, ALL_ELEMENTS))]
 
-    with open(args.inp) as lines:
-        lines = [x for x in lines if ("#" not in x and len(x.split()) >= 1)].copy()
-        inputs = [x.split()[0] for x in lines]
+    #with open(args.inp) as lines:
+    #    lines = [x for x in lines if ("#" not in x and len(x.split()) >= 1)].copy()
+    #    inputs = [x.split()[0] for x in lines]
+    inputs = [args.inp]
     # defining the shell structures ... (do not change)
     n_shells = 60
     n_cutoffs = np.linspace(0.1, 3.1, n_shells)
